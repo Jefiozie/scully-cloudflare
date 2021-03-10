@@ -9,7 +9,8 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "scully": "npm scully --",
-    "scully:serve": "npx scully serve --"
+    "scully:serve": "npx scully serve --",
+    "buildStatic": "ng build --prod && npx scully --RSD --scan"
   },
   "private": true,
   "dependencies": {
