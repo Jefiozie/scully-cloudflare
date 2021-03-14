@@ -1,0 +1,6 @@
+<section *ngIf="user$ | async as user">
+  <label>Name</label>
+  <p>{{user.name}}</p>
+  <label>Email</label>
+  <p>{{user.email}}</p>
+</section>
