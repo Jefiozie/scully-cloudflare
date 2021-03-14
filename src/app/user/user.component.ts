@@ -19,9 +19,7 @@ import { UserService } from '../users/users.service';
 })
 export class UserComponent implements OnInit {
   userId$: Observable<number> = this.route.params.pipe(
-    tap(console.error),
     pluck('userId'),
-    map((val) => parseInt(val, 10)),
     shareReplay(1)
   );
 
