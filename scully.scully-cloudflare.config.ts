@@ -15,7 +15,7 @@ export const config: ScullyConfig = {
       type: 'json',
       userId: {
         url: 'http://localhost:8200/users',
-        resultsHandler: (raw) => raw.filter((row) => row.id <= 9),
+        resultsHandler: (raw) => raw.filter((row) => row.id <= 10),
         property: 'id',
         postRenderers: postRenderers, // per route config
       },
