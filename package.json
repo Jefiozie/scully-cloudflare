@@ -10,7 +10,7 @@
     "e2e": "ng e2e",
     "scully": "npm scully --",
     "scully:serve": "npx scully serve --",
-    "buildStatic": "ng build --prod && npx scully --RSD --scan"
+    "buildStatic": "ng build --prod && npx scully --tds --rds --scanRoutes"
   },
   "private": true,
   "dependencies": {
@@ -44,6 +44,7 @@
     "karma-jasmine": "~4.0.0",
     "karma-jasmine-html-reporter": "^1.5.0",
     "protractor": "~7.0.0",
+    "scully-plugin-minify-html": "^5.0.0",
     "ts-node": "~8.3.0",
     "tslint": "~6.1.0",
     "typescript": "~4.0.2"

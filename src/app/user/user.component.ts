@@ -1,7 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { TransferStateService, isScullyGenerated } from '@scullyio/ng-lib';
 import { Observable } from 'rxjs';
-import { filter, map, pluck, shareReplay, tap } from 'rxjs/operators';
+import {
+  filter,
+  map,
+  pluck,
+  shareReplay,
+  switchMap,
+  tap,
+} from 'rxjs/operators';
+import { UserService } from '../users/users.service';
 
 @Component({
   selector: 'app-user',
@@ -12,11 +21,22 @@ export class UserComponent implements OnInit {
   userId$: Observable<number> = this.route.params.pipe(
     tap(console.error),
     pluck('userId'),
-    filter((val) => ![undefined, null].includes(val)),
     map((val) => parseInt(val, 10)),
     shareReplay(1)
   );
-  constructor(private readonly route: ActivatedRoute) {}
+
+  user$ = isScullyGenerated()
+    ? this.transferState
+        .getState('user')
+    : this.userId$.pipe(
+        switchMap((id) => this.userService.getUser(id)),
+        tap((user) => this.transferState.setState('user', user))
+      );
+  constructor(
+    private readonly route: ActivatedRoute,
+    private readonly userService: UserService,
+    private readonly transferState: TransferStateService
+  ) {}
 
   ngOnInit(): void {}
 }
